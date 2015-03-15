@@ -1,1 +1,1 @@
-DENY FROM ALL
+DirectoryIndex ../error/404.php
