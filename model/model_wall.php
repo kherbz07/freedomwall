@@ -26,4 +26,14 @@ class Model_wall extends PDOConnector
 		
 		return $rows;
 	}
+
+	public function getPost($username)
+	{
+		$stmt = $this->dbh->prepare('SELECT * FROM tbl_wall WHERE username=?;');
+		$stmt->bindValue(1, $username, PDO::PARAM_STR);
+		$stmt->execute();
+		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		return $rows;
+	}
 }
