@@ -55,7 +55,14 @@ $(function() {
 		getWall($count);
 	});
 	$('#btn-search').click(function() {
-		searchUsername();
+		if ($('#search-un').val() != '')
+		{
+			searchUsername();
+		}
+		else
+		{
+			alert('Please fill in the username to search.');
+		}
 	});
 	$('#search-form').submit(function() {
 		return false;

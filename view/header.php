@@ -27,7 +27,7 @@
 				<img alt="FW" src="../assets/img/fw.png" height="200px" />
 			</div>
 			<div class="col-md-8 quote-cntr">
-				<label>I am no bird: and no not ensnares me: I am a free human being with an independent will.</label>
+				<label class="tacenter">"Freedom is the right to tell people what they do not want to hear."</label>
 			</div>
 		</div>
 	</div>

@@ -4,11 +4,11 @@
 			<form id="post-form">
 			  <div class="form-group">
 			    <label for="exampleInputEmail1">Message</label>
-			    <input type="text" class="form-control" id="message" placeholder="What do you want to post?">
+			    <input type="text" class="form-control" id="message" placeholder="What do you want to post?" required>
 			  </div>
 			  <div class="form-group">
 			    <label for="exampleInputPassword1">Username</label>
-			    <input type="text" class="form-control" id="username" placeholder="Username" autocomplete="off">
+			    <input type="text" class="form-control" id="username" placeholder="Username" autocomplete="off" required>
 			    <label for="prompt" id="prompt"></label>
 			  </div>
 			  <button type="submit" id="btn-post" class="btn btn-primary btn-post">Submit</button>
