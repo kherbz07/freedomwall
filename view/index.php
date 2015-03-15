@@ -7,12 +7,14 @@
 </form>
 <div>
 <h3>Wall Posts</h3>
+<label id="wall-prompt">Loading Posts...</label>
 <div id="wall-posts">
-<label>Loading Posts...</label>
 </div>
+<button id="btn-more">More Posts</button>
 </div><br/><br/>
-<!-- <form action="douseractions.php" method="POST">
-<input type="hidden" name="action" value="recommendUser" />
+<form action="dowallactions.php" method="POST">
+<input type="hidden" name="action" value="getWall" />
 <input type="text" name="username" />
+<input type="text" name="from" />
 <button>Check</button>
-</form> -->
+</form>

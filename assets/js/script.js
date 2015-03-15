@@ -1,8 +1,10 @@
 $(function() {
+	$count = 0;
 	$('#post-form').submit(function() {
-		alert('processing');
+		$('#btn-post').text('Posting message...').prop('disabled', true);
 		$.post('dowallactions.php', {'action':'postMessage', 'username':$('#username').val(), 'message':$('#message').val()}, function(data) {
-			alert('added');
+			$('#btn-post').text('Submit').prop('disabled', false);
+			getWall(0);
 		});
 
 		return false;
@@ -20,7 +22,20 @@ $(function() {
 			}
 		}, 'json');
 	}));
+	$('#btn-more').click(function() {
+		$count += 10;
+		$('#btn-more').text('Loading More Posts...').prop('disabled', true);
+		getWall($count);
+	});
+
+	getWall(0);
 });
+
+function clearForm()
+{
+	$('#username').val('');
+	$('#message').text('');
+}
 
 function throttle(f, delay){
     var timer = null;
@@ -34,9 +49,27 @@ function throttle(f, delay){
     };
 }
 
-function getWall()
+function getWall($from)
 {
-	$.post('dowallactioins.php', {''}, function(data) {
-
+	$.post('dowallactions.php', {'action':'getWall', 'from':$from}, function(data) {
+		$('#wall-prompt').hide();
+		$wall = data.wall;
+		console.log($wall);
+		generateWallContent($wall);
 	}, 'json');
+}
+
+function generateWallContent($posts)
+{
+	$content = '';
+	for ($i = 0; $i < $posts.length; $i++)
+	{
+		$content += $posts[$i]['username'] + '<br/>' + $posts[$i]['message'] + '<hr/>';
+	}
+	if ($posts.length == 0)
+	{
+		$content = '<h4>No posts to show.</h4>';
+	}
+	$('#wall-posts').html($('#wall-posts').html() + $content);
+	$('#btn-more').text('More Posts').prop('disabled', false);
 }
