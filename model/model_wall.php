@@ -18,24 +18,9 @@ class Model_wall extends PDOConnector
 		return $this->dbh->lastInsertId();
 	}
 
-	public function getWall($username = '', $from = 0)
+	public function getWall($from)
 	{
-		$query = 'SELECT * FROM tbl_wall';
-		if ($username != '')
-		{
-			$query .= ' WHERE username = ?';
-		}
-		$query .= ' LIMIT ?, 25;';
-		$stmt = $this->dbh->prepare($query);
-		if ($username != '')
-		{
-			$stmt->bindValue(1, $username, PDO::PARAM_STR);
-			$stmt->bindValue(2, $from, PDO::PARAM_INT);
-		}
-		else
-		{
-			$stmt->bindValue(1, $from, PDO::PARAM_INT);
-		}
+		$stmt = $this->dbh->prepare('SELECT * FROM tbl_wall ORDER BY id DESC LIMIT ' . $from . ',10;');
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		

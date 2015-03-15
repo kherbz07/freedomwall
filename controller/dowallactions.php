@@ -26,6 +26,10 @@ class Wall
 		{
 			$this->postMessage();
 		}
+		else if ($action == 'getWall')
+		{
+			$this->getWall();
+		}
 	}
 
 	public function postMessage()
@@ -44,16 +48,8 @@ class Wall
 
 	public function getWall()
 	{
-		$username = '';
-		$from = 0;
-		if (isset($_POST['username']))
-		{
-			$username = $_POST['username'];
-		}
-		if (isset($_POST['from']))
-		{
-			$from = $_POST['from'];
-		}
-		$wall = $this->wall_model->getWall();
+		$from = $_POST['from'];
+		$wall = $this->wall_model->getWall($from);
+		echo '{"wall":' . json_encode($wall) . '}';
 	}
 }
