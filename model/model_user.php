@@ -3,50 +3,24 @@ require_once "../include/PDOConnector.php";
 
 class Model_user extends PDOConnector
 {
-	public function getUserWhereId($id)
+	public function __construct()
 	{
-		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE id=?;');
-		$stmt->bindValue(1, $username, PDO::PARAM_STR);
-		$stmt->execute();
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		if (count($rows) > 0)
-		{
-			return $rows[0];
-		}
-		else
-		{
-			return false;
-		}
+		$this->connect();
 	}
 
-	public function getUserLike($id)
+	public function getUserLike($username)
 	{
-		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE name LIKE ;');
-		$stmt->bindValue(1, $username, PDO::PARAM_STR);
+		$stmt = $this->dbh->prepare('SELECT username FROM tbl_wall WHERE username LIKE ?;');
+		$stmt->bindValue(1, $username . '%', PDO::PARAM_STR);
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		if (count($rows) > 0)
-		{
-			return $rows[0];
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	public function addUser($username)
-	{
-		$stmt = $this->dbh->prepare('INSERT INTO tbl_user(username) VALUES (?);');
-		$stmt->bindValue(1, $username, PDO::PARAM_STR);
-		$stmt->execute();
-
-		return $this->dbh->lastInsertId();
+		
+		return $rows;
 	}
 
 	public function isExistingUser($username)
 	{
-		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE username = ?');
+		$stmt = $this->dbh->prepare('SELECT username FROM tbl_wall WHERE username = ?');
 		$stmt->bindValue(1, $username, PDO::PARAM_STR);
 		$stmt->execute();
 
@@ -54,11 +28,11 @@ class Model_user extends PDOConnector
 
 		if(count($rows) > 0)
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 }
