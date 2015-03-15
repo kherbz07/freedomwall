@@ -28,7 +28,9 @@ How to Use
 	For viewing older messages that was post..
 		1. Click the "Older" button below the page.
 	For searching a post
-		1. Enter the text/username that you want to search on the search input area.
+		1. Enter the username that you want to search on the search input area.
 		2. Click the "Search" button
 
+
+~~~~~ENJOY~~~~~
 
