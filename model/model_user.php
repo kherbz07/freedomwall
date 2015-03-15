@@ -3,6 +3,11 @@ require_once "../include/PDOConnector.php";
 
 class Model_user extends PDOConnector
 {
+	public function __construct()
+	{
+		$this->connect();
+	}
+
 	public function getUserWhereId($id)
 	{
 		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE id=?;');
@@ -19,24 +24,20 @@ class Model_user extends PDOConnector
 		}
 	}
 
-	public function getUserLike($id)
+	public function getUserLike($username)
 	{
-		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE name LIKE ;');
-		$stmt->bindValue(1, $username, PDO::PARAM_STR);
+		$this->connect();
+		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE username LIKE ?;');
+		$stmt->bindValue(1, $username . '%', PDO::PARAM_STR);
 		$stmt->execute();
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		if (count($rows) > 0)
-		{
-			return $rows[0];
-		}
-		else
-		{
-			return false;
-		}
+		
+		return $rows;
 	}
 
 	public function addUser($username)
 	{
+		$this->connect();
 		$stmt = $this->dbh->prepare('INSERT INTO tbl_user(username) VALUES (?);');
 		$stmt->bindValue(1, $username, PDO::PARAM_STR);
 		$stmt->execute();
@@ -46,6 +47,7 @@ class Model_user extends PDOConnector
 
 	public function isExistingUser($username)
 	{
+		$this->connect();
 		$stmt = $this->dbh->prepare('SELECT * FROM tbl_user WHERE username = ?');
 		$stmt->bindValue(1, $username, PDO::PARAM_STR);
 		$stmt->execute();
@@ -54,11 +56,11 @@ class Model_user extends PDOConnector
 
 		if(count($rows) > 0)
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-			return true;
+			return false;
 		}
 	}
 }
