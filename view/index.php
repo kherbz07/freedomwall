@@ -5,6 +5,12 @@
 <label id="prompt"></label><br/>
 <button id="btn-post">Submit</button>
 </form>
+<div>
+<h3>Wall Posts</h3>
+<div id="wall-posts">
+<label>Loading Posts...</label>
+</div>
+</div><br/><br/>
 <!-- <form action="douseractions.php" method="POST">
 <input type="hidden" name="action" value="recommendUser" />
 <input type="text" name="username" />

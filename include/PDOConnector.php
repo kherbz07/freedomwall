@@ -2,7 +2,7 @@
 
 class PDOConnector{
 	private $host = "localhost";
-	private $dbname = "db_freedomwall";
+	private $dbname = "db_freedom_wall";
 	private $username = "root";
 	private $password = "";
 

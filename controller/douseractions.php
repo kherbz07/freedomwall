@@ -29,6 +29,7 @@ class User
 	{
 		$username = $_POST['username'];
 		$recommend = '';
+		
 		if ($this->user_model->isExistingUser($username))
 		{
 			$tmp_users = $this->user_model->getUserLike($this->getBase($username));

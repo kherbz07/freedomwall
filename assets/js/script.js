@@ -33,3 +33,10 @@ function throttle(f, delay){
         delay || 500);
     };
 }
+
+function getWall()
+{
+	$.post('dowallactioins.php', {''}, function(data) {
+
+	}, 'json');
+}

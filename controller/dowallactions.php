@@ -35,8 +35,25 @@ class Wall
 
 		if ($username != '' && $message != '')
 		{
-			$user_id = $this->user_model->addUser($username);
-			$this->wall_model->addWall($user_id, $message);
+			if (!$this->user_model->isExistingUser($username))
+			{
+				$this->wall_model->addWall($username, $message);
+			}
 		}
+	}
+
+	public function getWall()
+	{
+		$username = '';
+		$from = 0;
+		if (isset($_POST['username']))
+		{
+			$username = $_POST['username'];
+		}
+		if (isset($_POST['from']))
+		{
+			$from = $_POST['from'];
+		}
+		$wall = $this->wall_model->getWall();
 	}
 }
